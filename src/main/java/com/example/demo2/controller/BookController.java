@@ -2,7 +2,6 @@ package com.example.demo2.controller;
 
 import com.example.demo2.dto.request.BookCreateRequest;
 import com.example.demo2.dto.response.BookResponse;
-import com.example.demo2.model.entity.Book;
 import com.example.demo2.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
