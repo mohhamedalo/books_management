@@ -7,6 +7,7 @@ import com.example.demo2.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,11 +31,13 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<BookResponse> create(@RequestBody @Valid BookCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(bookService.create(request));
     }
 
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @GetMapping
     public ResponseEntity<?> getAll(
             @RequestParam(required = false) String authorName,
